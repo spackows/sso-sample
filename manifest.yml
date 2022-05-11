@@ -1,0 +1,4 @@
+---
+applications:
+ - name: sso-sample
+   memory: 256MB
