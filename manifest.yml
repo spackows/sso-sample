@@ -1,4 +1,4 @@
 ---
 applications:
- - name: sso-sample
+ - name: snazzy-sso-sample
    memory: 256MB
