@@ -48,9 +48,9 @@ g_app.get( '/', function( request, response )
 
 g_app.post( "/postResponse", function( request, response )
 {
-    console.log( "[server] / ..." );
-    console.log( "[server] / body:\n"    + JSON.stringify( request.body,    null, 3 ) );
-    console.log( "[server] / cookies:\n" + JSON.stringify( request.cookies, null, 3 ) );
+    console.log( "[server] /postResponse ..." );
+    console.log( "[server] /postResponse body:\n"    + JSON.stringify( request.body,    null, 3 ) );
+    console.log( "[server] /postResponse cookies:\n" + JSON.stringify( request.cookies, null, 3 ) );
     
     g_sso.handleSSOResponse( request, function( sso_err_str, attributes )
     {
@@ -60,7 +60,9 @@ g_app.post( "/postResponse", function( request, response )
             return;
         }
         
-        response.cookie( "attributes_str", JSON.stringify( attributes, null, 3 ), { httpOnly: true, maxAge: ( 2 * 60 * 60 * 1000 ) }  );
+        console.log( "[server] /postResponse attributes:\n" + JSON.stringify( attributes, null, 3 ) );
+        
+        response.cookie( "attributes", attributes, { httpOnly: true, maxAge: ( 2 * 60 * 60 * 1000 ) }  );
         
         response.redirect( "../" );
         
