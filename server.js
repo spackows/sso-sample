@@ -1,5 +1,5 @@
 
-const g_local_testing = true; // If true, skips SSO
+const g_local_testing = process.env.LOCALTESTING; // If true, skips SSO
 
 const g_express      = require( "express"       );
 const g_cookieParser = require( "cookie-parser" );
