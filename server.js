@@ -25,8 +25,8 @@ g_app.listen( 8080, function()
 
 g_app.get( '/', function( request, response )
 {
-    console.log( "[server] / ..." );
-    console.log( "[server] / cookies:\n" + JSON.stringify( request.cookies, null, 3 ) );
+    //console.log( "[server] / ..." );
+    //console.log( "[server] / cookies:\n" + JSON.stringify( request.cookies, null, 3 ) );
     
     var user_email = "None. ( Local testing )";
     
@@ -48,9 +48,9 @@ g_app.get( '/', function( request, response )
 
 g_app.post( "/postResponse", function( request, response )
 {
-    console.log( "[server] /postResponse ..." );
-    console.log( "[server] /postResponse body:\n"    + JSON.stringify( request.body,    null, 3 ) );
-    console.log( "[server] /postResponse cookies:\n" + JSON.stringify( request.cookies, null, 3 ) );
+    //console.log( "[server] /postResponse ..." );
+    //console.log( "[server] /postResponse body:\n"    + JSON.stringify( request.body,    null, 3 ) );
+    //console.log( "[server] /postResponse cookies:\n" + JSON.stringify( request.cookies, null, 3 ) );
     
     g_sso.handleSSOResponse( request, function( sso_err_str, user_email )
     {
@@ -60,7 +60,7 @@ g_app.post( "/postResponse", function( request, response )
             return;
         }
         
-        console.log( "[server] /postResponse user_email:\n" + JSON.stringify( user_email, null, 3 ) );
+        //console.log( "[server] /postResponse user_email:\n" + JSON.stringify( user_email, null, 3 ) );
         
         response.cookie( "user_email", user_email, { httpOnly: true, maxAge: ( 2 * 60 * 60 * 1000 ) }  );
         

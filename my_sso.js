@@ -18,7 +18,7 @@ var exports = module.exports = {};
 
 exports.login = function( response )
 {
-    console.log( "my_sso.login ..." );
+    //console.log( "my_sso.login ..." );
     //console.log( "my_sso.login g_sp:\n"  + JSON.stringify( g_sp,  null, 3 ) );
     //console.log( "my_sso.login g_idp:\n" + JSON.stringify( g_idp, null, 3 ) );
     
@@ -38,7 +38,8 @@ exports.login = function( response )
             return;
         }
         
-        console.log( "create_login_request_url redirecting ..." );
+        //console.log( "create_login_request_url redirecting ..." );
+        
         response.redirect( login_url );
 
     } );
@@ -50,7 +51,7 @@ exports.handleSSOResponse = function( request, callback )
 {
     var func_name = "my_sso.handleSSOResponse";
     
-    console.log( func_name + " ..." );
+    //console.log( func_name + " ..." );
     
     if( !request || !request["body"] )
     {
@@ -61,6 +62,7 @@ exports.handleSSOResponse = function( request, callback )
     }
     
     var options = { request_body: request["body"] };
+    
     //console.log( func_name + ": options:\n"  + JSON.stringify( options, null, 3 ) );
 
     g_sp.post_assert( g_idp, options, function( assert_err, saml_response )
@@ -76,7 +78,8 @@ exports.handleSSOResponse = function( request, callback )
 
         // Grab whatever attributes you want...
         var user_email = saml_response ? ( saml_response.user ? ( saml_response.user.attributes ? ( saml_response.user.attributes.emailAddress ? saml_response.user.attributes.emailAddress : null ) : null ) : null ) : null;
-        console.log( func_name + ": user_email: " + user_email );
+        //console.log( func_name + ": user_email: " + user_email );
+        
         callback( null, user_email );
         
   } );
