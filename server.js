@@ -28,20 +28,20 @@ g_app.get( '/', function( request, response )
     console.log( "[server] / ..." );
     console.log( "[server] / cookies:\n" + JSON.stringify( request.cookies, null, 3 ) );
     
-    var attributes_str = "None. ( Local testing )";
+    var user_email = "None. ( Local testing )";
     
     if( !g_local_testing )
     {
-        attributes_str = request ? ( request.cookies ? ( request.cookies.attributes_str ? request.cookies.attributes_str : "" ) : "" ) : "";
+        user_email = request ? ( request.cookies ? ( request.cookies.user_email ? request.cookies.user_email : "" ) : "" ) : "";
         
-        if( !attributes_str )
+        if( !user_email )
         {
             g_sso.login( response );
             return;
         }
     }
     
-    response.render( "pages/main", { "attributes_str" : attributes_str } );
+    response.render( "pages/main", { "user_email" : user_email } );
     
 } );
 
@@ -52,7 +52,7 @@ g_app.post( "/postResponse", function( request, response )
     console.log( "[server] /postResponse body:\n"    + JSON.stringify( request.body,    null, 3 ) );
     console.log( "[server] /postResponse cookies:\n" + JSON.stringify( request.cookies, null, 3 ) );
     
-    g_sso.handleSSOResponse( request, function( sso_err_str, attributes )
+    g_sso.handleSSOResponse( request, function( sso_err_str, user_email )
     {
         if( sso_err_str )
         {
@@ -60,9 +60,9 @@ g_app.post( "/postResponse", function( request, response )
             return;
         }
         
-        console.log( "[server] /postResponse attributes:\n" + JSON.stringify( attributes, null, 3 ) );
+        console.log( "[server] /postResponse user_email:\n" + JSON.stringify( user_email, null, 3 ) );
         
-        response.cookie( "attributes", attributes, { httpOnly: true, maxAge: ( 2 * 60 * 60 * 1000 ) }  );
+        response.cookie( "user_email", user_email, { httpOnly: true, maxAge: ( 2 * 60 * 60 * 1000 ) }  );
         
         response.redirect( "../" );
         

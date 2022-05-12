@@ -75,9 +75,9 @@ exports.handleSSOResponse = function( request, callback )
         }
 
         // Grab whatever attributes you want...
-        var attributes = saml_response ? ( saml_response.user ? ( saml_response.user.attributes ? saml_response.user.attributes : null ) : null ) : null;
-        console.log( func_name + ": attributes:\n" + JSON.stringify( attributes, null, 3 ) );
-        callback( null, attributes );
+        var user_email = saml_response ? ( saml_response.user ? ( saml_response.user.attributes ? ( saml_response.user.attributes.emailAddress ? saml_response.user.attributes.emailAddress : null ) : null ) : null ) : null;
+        console.log( func_name + ": user_email: " + user_email );
+        callback( null, user_email );
         
   } );
       
